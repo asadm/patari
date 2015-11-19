@@ -16,8 +16,8 @@ I love Patari and support their vision. So I made this app in my free time.
 
 ## Download
 
-- [Mac OS X](http://patari.pk)
-- [Windows](http://patari.pk)
+- [Mac OS X](dist/patari-osx.zip?raw=true)
+- [Windows](dist/patari-win.zip?raw=true)
 
 
 ## Contribute
