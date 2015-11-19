@@ -39,5 +39,10 @@ $ npm run make-osx
 $ npm run make-win
 ```
 
+## Relevant Files
+- [```./main.js```](main.js) holds the main logic for electron based app.
+- [```./preload.js```](preload.js) this script is injected into Patari website onload. Starts communication with host (main.js) and set's up helpers and listeners for DOM playlist changes etc.
+- [```./libs/domhelpers.js```](libs/domhelpers.js) This class is a wrapper around any interaction with HTML DOM of Patari. If Patari website changes significantly and breaks this app, This is where to make fixes.
+- [```./libs/observer.js```](libs/observer.js) helper function used by ```domhelpers.js```, uses MutationObserver checks if there are any changes in the DOM tree of given target.
 
 #### License [MIT](LICENSE.md)
