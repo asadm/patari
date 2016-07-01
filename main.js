@@ -1,25 +1,26 @@
-var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
-var globalShortcut = require('global-shortcut');
-var ipc = require('ipc');
-var path = require('path');
-var Menu = require('menu');
-//var Notification = require('notification');
-var Tray = require('tray');
-//var notifier = require('node-notifier');
-var http = require('http');
-var https = require('https');
-var fs = require('fs');
+'use strict'
+const app = require('app');  // Module to control application life.
+const BrowserWindow = require('browser-window');  // Module to create native browser window.
+const globalShortcut = require('global-shortcut');
+const ipc = require('ipc');
+const path = require('path');
+const Menu = require('menu');
+//const Notification = require('notification');
+const Tray = require('tray');
+//const notifier = require('node-notifier');
+const http = require('http');
+const https = require('https');
+const fs = require('fs');
 
 // Report crashes to our server.
 require('crash-reporter').start();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-var mainWindow = null;
-var appIcon = null;
+let mainWindow = null;
+let appIcon = null;
 
-var playlist = [];
+let playlist = [];
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
   // On OS X it is common for applications and their menu bar
@@ -33,7 +34,7 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  var preload = path.resolve(path.join(__dirname, 'preload.js'));
+  let preload = path.resolve(path.join(__dirname, 'preload.js'));
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
@@ -109,7 +110,7 @@ app.on('will-quit', function() {
 
 function generateContextMenu(){
 
-  var currentlyPlaying = false;
+  let currentlyPlaying = false;
 
   for (var i in playlist){
     if (playlist[i].isPlaying)
@@ -123,8 +124,8 @@ function generateContextMenu(){
     menu.push({label:"Playing: "+currentlyPlaying.title,enabled:false});
 
     //pull the thumbnail first
-    var file = fs.createWriteStream(__dirname + "/temp.jpg");
-    var request = https.get(currentlyPlaying.thumbnail, function(response) {
+    let file = fs.createWriteStream(__dirname + "/temp.jpg");
+    let request = https.get(currentlyPlaying.thumbnail, function(response) {
       response.pipe(file);
       file.on('finish', function() {
         file.close(function(){
@@ -180,11 +181,11 @@ function generateContextMenu(){
 }
 
 function updateTrayMenu(){
-  var contextMenu = generateContextMenu();
+  let contextMenu = generateContextMenu();
   appIcon.setContextMenu(contextMenu);
 }
 
-var quitCalled=false;
+let quitCalled = false;
 function quit(dontcallquit){
   if (quitCalled) return;
 
