@@ -1,19 +1,11 @@
 'use strict'
-const app = require('app');  // Module to control application life.
-const BrowserWindow = require('browser-window');  // Module to create native browser window.
-const globalShortcut = require('global-shortcut');
-const ipc = require('ipc');
+const { app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray, Notification } = require('electron');  // Module to control application life.
 const path = require('path');
-const Menu = require('menu');
 //const Notification = require('notification');
-const Tray = require('tray');
 //const notifier = require('node-notifier');
 const http = require('http');
 const https = require('https');
 const fs = require('fs');
-
-// Report crashes to our server.
-require('crash-reporter').start();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -39,18 +31,19 @@ app.on('ready', function() {
     width: 1000,
     height: 600,
     title: "Patari",
+    autoHideMenuBar: true,
     preload:preload,
     icon: path.join(__dirname, 'assets/patari-logo.png'),
     "web-preferences":{"node-integration": false}});
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('http://patari.pk');
-  mainWindow.setMenuBarVisibility(false);
+  mainWindow.loadURL('http://patari.pk');
+
 
   // Open the DevTools.
   //mainWindow.openDevTools();
 
-  ipc.on('playlist_update', function (event,args) {
+  ipcMain.on('playlist_update', function (event,args) {
       console.log(args);
       playlist = args;
       updateTrayMenu();
@@ -81,15 +74,11 @@ app.on('ready', function() {
     mainWindow.hide();
     //app.quit();
   });
-  
-
 
   //tray icon
   //console.log(path.join(__dirname, 'assets/patari-logo.png'));
   appIcon = new Tray(path.join(__dirname, 'assets/tray.png'));
-  
   appIcon.setToolTip('Patari');
-  appIcon.setHighlightMode(false);
   updateTrayMenu();
   //console.log(appIcon);
 });
@@ -140,7 +129,6 @@ function generateContextMenu(){
       });
     });
 
-    
   }
 
   menu.push({label:"Play/Pause", click:function(){
@@ -174,7 +162,6 @@ function generateContextMenu(){
       menu.push(c);
 
     })(i);
-    
   }
   return Menu.buildFromTemplate(menu);
 
@@ -195,7 +182,7 @@ function quit(dontcallquit){
     mainWindow.removeAllListeners('close');
     mainWindow.close();
   }
-  
+
   globalShortcut.unregisterAll();
   if (!dontcallquit)
     app.quit();

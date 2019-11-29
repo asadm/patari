@@ -5,8 +5,10 @@
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "make-osx":"electron-packager . Patari --platform=darwin --arch=x64 --version=0.35.0 --icon=./assets/patari-logo.icns  --overwrite=force --app-bundle-id=com.patari.patariapp --helper-bundle-id=com.patari.patariapp --out=./bundles",
-    "make-win":"electron-packager . Patari --platform=win32 --arch=ia32 --version=0.35.0 --icon=./assets/patari-logo.icns  --overwrite=force --app-bundle-id=com.patari.patariapp --helper-bundle-id=com.patari.patariapp --out=./bundles"
+    "make-osx":"electron-packager . Patari --asar --platform=darwin --arch=x64 --electron-version=7.1.2 --icon=./assets/patari-logo.icns  --overwrite=force --app-bundle-id=com.patari.patariapp --helper-bundle-id=com.patari.patariapp",
+    "make-win":"electron-packager . Patari --asar --platform=win32 --arch=ia32 --electron-version=7.1.2 --overwrite --icon=./assets/patari-logo.icns",
+    "make-linux":"electron-packager . Patari --asar --platform=linux --arch=x64 --electron-version=7.1.2 --overwrite --icon=./assets/patari-logo.icns",
+    "make-linux-build": "electron-installer-debian --src Patari-linux-x64 --dest dist/ --arch amd64 --icon=./assets/patari-logo.icns"
   },
   "repository": {
     "type": "git",
@@ -22,9 +24,7 @@
     "url": "https://github.com/asadm/patari/issues"
   },
   "homepage": "https://github.com/asadm/patari#readme",
-  "devDependencies": {
-    "electron-prebuilt": "^0.34.0"
-  },
   "dependencies": {
+    "electron-installer-debian": "^2.0.1"
   }
 }
