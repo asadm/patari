@@ -1,6 +1,6 @@
 # Patari App
 
-**Patari app for OS X and Windows.**
+**Patari app for Debian, OS X and Windows.**
 
 This is a wrapper around [Patari](http://patari.pk) music site using the wonderful [Electron](https://github.com/atom/electron/) framework.
 
@@ -18,6 +18,7 @@ I love Patari and support their vision. So I made this app in my free time.
 
 - [Mac OS X](dist/patari-osx.zip?raw=true)
 - [Windows](dist/patari-win.zip?raw=true)
+- [Debain](dist/patari_1.0.0_amd64.deb?raw=true)
 
 ## Issues
 - If the Windows version crashes on playing any song, please set the compatibility mode for *Patari.exe* to Windows 7. The bug is currently under investigation.
