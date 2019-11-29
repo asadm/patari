@@ -18,7 +18,7 @@ I love Patari and support their vision. So I made this app in my free time.
 
 - [Mac OS X](dist/patari-osx.zip?raw=true)
 - [Windows](dist/patari-win.zip?raw=true)
-- [Debain](https://bit.ly/2OV4l6Z)
+- [Debian](https://bit.ly/2OV4l6Z)
 
 ## Issues
 - If the Windows version crashes on playing any song, please set the compatibility mode for *Patari.exe* to Windows 7. The bug is currently under investigation.
